@@ -128,3 +128,32 @@ Remote/shared code: Always import dynamically.
 Local code: You can use static imports as usual.
 
 </blockquote>
+
+# Runtime Configuration
+
+The host application can dynamically configure the borrowed component
+
+- Implemented a UI (color picker) to demonstrate this configuration
+- The configuration is passed through props: <ReactRemoteApp backgroundColor={bgColor} />
+
+This pattern is particularly useful in micro-frontend architectures because:
+
+- It allows for loose coupling between applications
+- The remote component remains reusable and configurable
+- The host application can control the component's appearance/behavior without modifying the remote code
+- Changes to the configuration can be made at runtime
+
+Remote:
+
+![alt text](image-6.png)
+
+Host:
+
+```tsx
+<Route
+  path="/react-remote"
+  element={<ReactRemoteApp backgroundColor={bgColor} />}
+/>
+```
+
+![alt text](image-7.png)
