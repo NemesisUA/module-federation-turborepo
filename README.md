@@ -76,19 +76,19 @@ This project uses Webpack's Module Federation to share components between applic
 
 Host app: http://localhost:3000
 
-![alt text](image.png)
+![alt text](./docs/images/screenshots/image.png)
 
 React Remote: http://localhost:3002
 
-![alt text](image-1.png)
+![alt text](./docs/images/screenshots/image-1.png)
 
 ## Modified remote app
 
-![alt text](image-2.png)
+![alt text](./docs/images/screenshots/image-2.png)
 
 Refresh is all that needed to update the host app:
 
-![alt text](image-3.png)
+![alt text](./docs/images/screenshots/image-3.png)
 
 ## Code Sharing:
 
@@ -109,7 +109,7 @@ const ReactRemoteApp = React.lazy(() => import("reactRemote/App"));
 
 2. Remote Component Exposed:
 
-![alt text](image-5.png)
+![alt text](./docs/images/screenshots/image-5.png)
 
 > ### Question: Should I always import shared code dynamicky or I can also just import it?
 
@@ -145,7 +145,7 @@ This pattern is particularly useful in micro-frontend architectures because:
 
 Remote:
 
-![alt text](image-6.png)
+![alt text](./docs/images/screenshots/image-6.png)
 
 Host:
 
@@ -156,4 +156,4 @@ Host:
 />
 ```
 
-![alt text](image-7.png)
+![alt text](./docs/images/screenshots/image-7.png)
