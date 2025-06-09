@@ -89,3 +89,42 @@ React Remote: http://localhost:3002
 Refresh is all that needed to update the host app:
 
 ![alt text](image-3.png)
+
+## Code Sharing:
+
+1. Host Component Borrows:
+
+- The host application (apps/host) is borrowing the App component from the remote application (apps/react-remote)
+- This is configured in the host's webpack config through the remotes setting:
+
+```js
+remotes: {
+  reactRemote: "reactRemote@http://localhost:3002/remoteEntry.js"; // import name + host + filename
+}
+```
+
+```tsx
+const ReactRemoteApp = React.lazy(() => import("reactRemote/App"));
+```
+
+2. Remote Component Exposed:
+
+![alt text](image-5.png)
+
+> ### Question: Should I always import shared code dynamicky or I can also just import it?
+
+<blockquote>
+With Module Federation, you should import shared (remote) code dynamically using React.lazy or a similar dynamic import. For example:
+
+```jsx
+const RemoteComponent = React.lazy(() => import("remoteApp/Component"));
+```
+
+Why? The remote code is loaded at runtime from another build/bundle.
+Static imports (e.g. import { Component } from "remoteApp/Component") will not work, because the code does not exist at build time—it's fetched at runtime.
+
+Summary:  
+Remote/shared code: Always import dynamically.  
+Local code: You can use static imports as usual.
+
+</blockquote>
