@@ -129,6 +129,20 @@ Local code: You can use static imports as usual.
 
 </blockquote>
 
+### UPD
+
+> When Should You Use Simple Imports?
+You can use simple imports for federated modules when:
+
+Static Remotes: The remote modules are predefined and their URLs are known at build time.
+Code Splitting is Not a Concern: If you're okay with shipping everything (resolved at runtime) without deferring the loading of unused parts of the code.
+
+```jsx
+import RemoteComponent from 'remote/Component';
+const App = () => <RemoteComponent />;
+```
+This works because Webpack dynamically maps remote/Component to the remote module defined in ModuleFederationPlugin.
+
 # Runtime Configuration
 
 The host application can dynamically configure the borrowed component
