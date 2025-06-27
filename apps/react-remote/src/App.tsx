@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <div style={{ backgroundColor: "pink", padding: "10px" }}>
       <h1>Remote App Notification: You are on route {location.pathname}</h1>
-      <button onClick={() => navigate(-1)} style={{ marginBottom: '1rem' }}>Back</button>
+      <button onClick={() => navigate("/hostContacts")} style={{ marginBottom: '1rem' }}>Back</button>
       <nav style={{ backgroundColor: "lightgray", padding: "10px", opacity: 0.8 }}>
         <ul>
           <li><Link to="">Home</Link></li>

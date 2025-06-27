@@ -1,17 +1,22 @@
 import React, { lazy } from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Outlet, useNavigate } from 'react-router-dom';
 import { HostRoutePage } from './HostRoutePage';
 
 const ReactRemoteApp = lazy(() => import("reactRemote/App"));
 
-const Layout: React.FC = () => (
+const Layout: React.FC = () => {
+  const navigate = useNavigate();
+  return (
   <>
     <header style={{ background: '#222', color: '#fff', padding: '1rem', marginBottom: '1rem' }}>
       <h1>Host App Header</h1>
     </header>
+
+    <button onClick={() => navigate("/")} style={{ marginBottom: '1rem' }}>Back</button>
     <Outlet />
   </>
 );
+}
 
 const App: React.FC = () => {
   return (
