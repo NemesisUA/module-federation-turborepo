@@ -1,58 +1,38 @@
-import React, { Suspense, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { lazy } from 'react';
+import { Routes, Route, Outlet, useNavigate } from 'react-router-dom';
+import { HostRoutePage } from './HostRoutePage';
 
-const ReactRemoteApp = React.lazy(() => import("reactRemote/App"));
+const ReactRemoteApp = lazy(() => import("reactRemote/App"));
 
-const App = () => {
-  const [bgColor, setBgColor] = useState("lightblue");
-
-  const colors = ["lightblue", "lightgreen", "lightpink", "lightyellow"];
-
+const Layout: React.FC = () => {
+  const navigate = useNavigate();
   return (
-    <div style={{ padding: "20px" }}>
-      <nav>
-        <ul style={{ display: "flex", gap: "20px", listStyle: "none", padding: 0 }}>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/react-remote">React Remote</Link>
-          </li>
-        </ul>
-      </nav>
+  <>
+    <header style={{ background: '#222', color: '#fff', padding: '1rem', marginBottom: '1rem' }}>
+      <h1>Host App Header</h1>
+    </header>
 
-      <div style={{ marginTop: "20px" }}>
-        <h3>Select background color for remote component:</h3>
-        <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
-          {colors.map((color) => (
-            <button
-              key={color}
-              onClick={() => setBgColor(color)}
-              style={{
-                backgroundColor: color,
-                border: "1px solid #ccc",
-                padding: "8px 16px",
-                cursor: "pointer",
-                borderRadius: "4px",
-              }}
-            >
-              {color}
-            </button>
-          ))}
-        </div>
-      </div>
+    <button onClick={() => navigate("/")} style={{ marginBottom: '1rem' }}>Back</button>
+    <Outlet />
+  </>
+);
+}
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<div>Host Application Home</div>} />
-          <Route
-            path="/react-remote"
-            element={<ReactRemoteApp backgroundColor={bgColor} />}
-          />
-        </Routes>
-      </Suspense>
-    </div>
-  );
+const App: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HostRoutePage />} />
+        <Route path="hostAbout" element={<HostRoutePage />} />
+        <Route path="hostContacts" element={<HostRoutePage />} />
+        <Route path="remote/*" element={
+          <React.Suspense fallback={<div>Loading remote...</div>}>
+            <ReactRemoteApp />
+          </React.Suspense>
+        } />
+      </Route>
+    </Routes>
+  )
 };
 
 export default App; 
