@@ -1,5 +1,5 @@
-import React, { Suspense} from "react";
-import { Routes, Route, Link, BrowserRouter, useLocation } from "react-router-dom";
+import React, { Suspense } from "react";
+import { useLocation } from "react-router-dom";
 
 const ReactRemoteApp = React.lazy(() => import("reactRemote/App"));
 
@@ -12,8 +12,8 @@ export const HostRoutePage: React.FC = () => {
       <nav style={{ backgroundColor: "lightgray", padding: "10px", opacity: 0.8 }}>
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/remoteAbout">About</a></li>
-          <li><a href="/remoteContacts">Contacts</a></li>
+          <li><a href="/hostAbout">About</a></li>
+          <li><a href="/hostContacts">Contacts</a></li>
         </ul>
       </nav>
 
